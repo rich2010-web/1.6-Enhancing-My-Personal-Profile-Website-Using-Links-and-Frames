@@ -10,11 +10,16 @@
     <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    <script>
-        emailjs.init({
-            publicKey: "d2qtMLP2W8dQh0WOk"
-        });
-    </script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "rSgQ-iaRvbYQXHRy2",
+      });
+   })();
+
 </head>
 
 <body>
@@ -59,7 +64,7 @@
         <br><br>
 
         <!-- Gender -->
-        <label>Gender:</label>
+         <label for="gender">Gender:</label>
         <br>
 
         <input type="radio" id="male" name="gender" value="Male" required>
@@ -119,8 +124,8 @@
             event.preventDefault();
 
             emailjs.sendForm(
-                "service_pjh0uuc",
-                "template_hwwchig",
+                "service_ipbz7ep",
+                "template_1kt3cpx",
                 this
             )
             .then(function() {
