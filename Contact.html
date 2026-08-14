@@ -9,7 +9,7 @@
 
     <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
+    </script>
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
@@ -19,7 +19,7 @@
         publicKey: "rSgQ-iaRvbYQXHRy2",
       });
    })();
-
+</script>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
     <h1>Contact Me</h1>
 
     <nav>
-        <a href="index.html">Home</a> |
+         <a href="index.html">Home</a> |
         <a href="About.html">About Me</a> |
         <a href="Hobbies.html">Hobbies</a> |
         <a href="Favorites.html">Favorites</a> |
@@ -51,7 +51,7 @@
 
         <br><br>
 
-        <!-- Gmail -->
+        <!-- Email -->
         <label for="email">Gmail:</label>
         <input
             type="email"
@@ -64,7 +64,7 @@
         <br><br>
 
         <!-- Gender -->
-         <label for="gender">Gender:</label>
+        <label for="gender">Gender:</label>
         <br>
 
         <input type="radio" id="male" name="gender" value="Male" required>
@@ -119,27 +119,34 @@
     </form>
 
     <script>
-        document.getElementById("contact-form").addEventListener("submit", function(event) {
+        const form = document.getElementById("contact-form");
+
+        form.addEventListener("submit", function(event) {
 
             event.preventDefault();
 
             emailjs.sendForm(
                 "service_ipbz7ep",
                 "template_1kt3cpx",
-                this
+                form
             )
-            .then(function() {
+            .then(function(response) {
+
+                console.log("SUCCESS!", response.status, response.text);
 
                 alert("Message sent successfully!");
 
-                document.getElementById("contact-form").reset();
+                form.reset();
 
             })
             .catch(function(error) {
 
-                alert("Message failed to send. Please try again.");
+                console.error("EMAILJS ERROR:", error);
 
-                console.error("EmailJS Error:", error);
+                alert(
+                    "Message failed to send.\n\n" +
+                    "Please check the browser console (F12) for the error."
+                );
 
             });
 
