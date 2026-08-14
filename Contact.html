@@ -4,22 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Contact Me</title>
 
-    <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Init EmailJS -->
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "rSgQ-iaRvbYQXHRy2",
+            });
+        })();
     </script>
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
-<script type="text/javascript">
-   (function(){
-      emailjs.init({
-        publicKey: "rSgQ-iaRvbYQXHRy2",
-      });
-   })();
-</script>
 </head>
 
 <body>
@@ -27,12 +24,12 @@
     <h1>Contact Me</h1>
 
     <nav>
-         <a href="index.html">Home</a> |
+        <a href="index.html">Home</a> |
         <a href="About.html">About Me</a> |
         <a href="Hobbies.html">Hobbies</a> |
         <a href="Favorites.html">Favorites</a> |
         <a href="Goals.html">Goals</a> |
-        <a href="Contact.html">Contact Me</a> |
+        <a href="Contact.html">Contact Me</a>
     </nav>
 
     <hr>
@@ -41,30 +38,18 @@
 
         <!-- Name -->
         <label for="name">Full Name:</label>
-        <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter your name"
-            required
-        >
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
         <br><br>
 
         <!-- Email -->
         <label for="email">Gmail:</label>
-        <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your Gmail"
-            required
-        >
+        <input type="email" id="email" name="email" placeholder="Enter your Gmail" required>
 
         <br><br>
 
         <!-- Gender -->
-        <label for="gender">Gender:</label>
+        <label>Gender:</label>
         <br>
 
         <input type="radio" id="male" name="gender" value="Male" required>
@@ -86,7 +71,6 @@
 
         <!-- Strand -->
         <label for="strand">Strand:</label>
-
         <select id="strand" name="strand" required>
             <option value="">Select Strand</option>
             <option value="ICT">ICT</option>
@@ -101,15 +85,7 @@
         <!-- Message -->
         <label for="message">Message:</label>
         <br>
-
-        <textarea
-            id="message"
-            name="message"
-            rows="5"
-            cols="50"
-            placeholder="Type your message here..."
-            required
-        ></textarea>
+        <textarea id="message" name="message" rows="5" cols="50" placeholder="Type your message here..." required></textarea>
 
         <br><br>
 
@@ -122,34 +98,19 @@
         const form = document.getElementById("contact-form");
 
         form.addEventListener("submit", function(event) {
-
             event.preventDefault();
 
-            emailjs.sendForm(
-                "service_ipbz7ep",
-                "template_1kt3cpx",
-                form
-            )
-            .then(function(response) {
-
-                console.log("SUCCESS!", response.status, response.text);
-
-                alert("Message sent successfully!");
-
-                form.reset();
-
-            })
-            .catch(function(error) {
-
-                console.error("EMAILJS ERROR:", error);
-
-                alert(
-                    "Message failed to send.\n\n" +
-                    "Please check the browser console (F12) for the error."
-                );
-
-            });
-
+            // Target the form via selector string for EmailJS v4
+            emailjs.sendForm("service_ipbz7ep", "template_1kt3cpx", "#contact-form")
+                .then(function(response) {
+                    console.log("SUCCESS!", response.status, response.text);
+                    alert("Message sent successfully!");
+                    form.reset();
+                })
+                .catch(function(error) {
+                    console.error("EMAILJS ERROR:", error);
+                    alert("Message failed to send.\n\nPlease check the browser console (F12) for details.");
+                });
         });
     </script>
 
